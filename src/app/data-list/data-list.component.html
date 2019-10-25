@@ -1,0 +1,73 @@
+<div class="container main-container search-panel">
+  <div class="row">
+
+    <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+      <label class="input-label">
+        Find a Planet:
+      </label>
+      <input class="search-input" type="text" placeholder="Planet search..." [(ngModel)]="search" />
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+      <!--      <label class="input-label">-->
+      <!--        Wookiee translation:-->
+      <!--      </label>-->
+      <!--      <input type="checkbox" id="switch" />-->
+      <!--      <label class="toogle" for="switch">Toggle</label>-->
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+      <label class="input-label">Cards per page:</label>
+      <ul class="cards-limiter">
+        <li>5</li>
+        <li>10</li>
+        <li>25</li>
+        <li>100</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+
+<div *ngIf="!loading; else loadingBlock" class="row">
+  <div *ngFor="let planetData of planetInfoList | filter:search" class="col-lg-4 col-md-6 col-sm-12" >
+    <div class="main-container list-item">
+      <h3>{{planetData.name}}</h3>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>Climate</th>
+            <th>{{planetData.climate}}</th>
+          </tr>
+          <tr>
+            <th>Population</th>
+            <th>{{planetData.population}}</th>
+          </tr>
+          <tr>
+            <th>Gravity</th>
+            <th>{{planetData.gravity}}</th>
+          </tr>
+          <tr>
+            <th>Terrain</th>
+            <th>{{planetData.terrain}}</th>
+          </tr>
+        </tbody>
+      </table>
+      <div class="more-info-button">
+        More
+        <i class="arrow right"></i>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingBlock>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center" >
+      <div class="lds-dual-ring"></div>
+    </div>
+  </div>
+</ng-template>
+
+
