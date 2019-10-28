@@ -1,5 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {DataArr, PlanetDataService, PlanetInfoList} from '../services/planet-data.service';
+import {Component, OnInit} from '@angular/core';
+import {PlanetDataService} from '../services/planet-data.service';
 
 @Component({
   selector: 'app-data-list',
@@ -9,26 +9,38 @@ import {DataArr, PlanetDataService, PlanetInfoList} from '../services/planet-dat
 export class DataListComponent implements OnInit {
 
   search = ''
-  loading = false
-  tempList: DataArr
-  planetInfoList: PlanetInfoList[] = []
-  nextRequest = 'https://swapi.co/api/planets/?page=1'
-  i = 0
 
-  constructor(private planetDataService: PlanetDataService){}
+  constructor(public planetDataService: PlanetDataService){}
   ngOnInit() {
-    this.fetchPlanets()
+    this.planetDataService.getPlanetsData()
   }
 
-  private async fetchPlanets() {
-    this.loading = true
-    while (this.i !== 3) {
-      const planetData = await this.planetDataService.getPlanetsData(this.nextRequest).toPromise()
-      this.tempList = planetData
-      this.nextRequest = this.tempList.next
-      this.planetInfoList = this.planetInfoList.concat(this.tempList.results)
-      this.i++
+  setPageSize(event: Event) {
+    const element = event.target as HTMLElement
+    this.planetDataService.changeLoaderStatus('Loading next page')
+    this.planetDataService.reqNumOfPlanet = +element.textContent
+    this.planetDataService.maxPage = (this.planetDataService.planetInfoList.length / +element.textContent) - 1
+    this.planetDataService.currentPage = 0
+    this.planetDataService.changeLoaderStatus('')
+  }
+
+  changePage(way: string) {
+    switch (way) {
+      case 'next': {
+        this.planetDataService.changeLoaderStatus('Loading next page')
+        this.planetDataService.currentPage++
+        break;
+      }
+      case 'prev': {
+        this.planetDataService.changeLoaderStatus('Loading previous page')
+        this.planetDataService.currentPage--
+        break;
+      }
+      default: {
+        this.planetDataService.changeLoaderStatus('Error has occured. Fixing the problem.')
+        this.planetDataService.currentPage = 0
+      }
     }
-    this.loading = false
+    this.planetDataService.changeLoaderStatus('')
   }
 }

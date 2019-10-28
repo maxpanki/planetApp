@@ -1,0 +1,66 @@
+th {
+  width: 15%;
+}
+td {
+  width: 35%;
+}
+.section {
+  padding: 1rem;
+}
+.back-button{
+  display: inline-block;
+  border-radius: 50%;
+  background: #1E1E2C;
+  padding: 8px 17px;
+  font-size: 18px;
+}
+.back-button:hover{
+  color: #1E1E2C;
+  background: #33E1ED;
+  text-decoration: none;
+}
+
+/* Search Panel Wookiee translation switch styles */
+input[type=checkbox]{
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.toogle {
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 4rem;
+  height: 2rem;
+  background: grey;
+  display: inline-block;
+  border-radius: 1rem;
+  position: absolute;
+  margin-top: 7px;
+}
+
+.toogle:after {
+  content: '';
+  position: absolute;
+  top: 0.1rem;
+  left: 0.1rem;
+  width: 1.6rem;
+  height: 1.7rem;
+  background: #1E1E2C;
+  border-radius: 0.8rem;
+  transition: 0.3s;
+}
+
+input:checked + .toogle {
+  background: #33E1ED;
+}
+
+input:checked + .toogle:after {
+  left: calc(100% - 0.1rem);
+  transform: translateX(-100%);
+}
+
+.toogle:active:after {
+  width: 1rem;
+}
+/* End of Search Panel Wookiee translation switch styles*/

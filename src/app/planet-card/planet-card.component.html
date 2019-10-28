@@ -1,1 +1,74 @@
-<p>planet-card works!</p>
+<div class="container main-container search-panel">
+
+  <div class="row section">
+    <div class="col-lg-1 col-md-2 col-sm-12 text-center">
+      <a [routerLink]="['']" class="back-button">
+        &#8249;
+      </a>
+    </div>
+  </div>
+
+  <div *ngIf="planetDataService.loading.operationCount === 0; else loadingBlock">
+    <div class="row section">
+      <div class="col-lg-2 offset-lg-5 col-md-4 offset-md-4 col-sm-12 text-center">
+        <h2>{{planetDataService.planetInfo.name}}</h2>
+      </div>
+      <div class="col-lg-2 offset-lg-3 col-md-4 col-sm-12 text-center">
+        <small>Edited: {{planetDataService.planetInfo.edited | date}}</small>
+      </div>
+    </div>
+    <div class="row section">
+      <div class="col-lg-10 offset-lg-1 col-md-12 col-sm-12 text-center table-responsive">
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <th>Diameter:</th>
+              <td>{{planetDataService.planetInfo.diameter | numData:'diameter'}}</td>
+              <th>Rotation period:</th>
+              <td>{{planetDataService.planetInfo.rotation_period  | numData:'rotation_period'}}</td>
+            </tr>
+            <tr>
+              <th>Orbital period:</th>
+              <td>{{planetDataService.planetInfo.orbital_period  | numData:'orbital_period'}}</td>
+              <th>Gravity:</th>
+              <td>{{planetDataService.planetInfo.gravity}}</td>
+            </tr>
+            <tr>
+              <th>Population:</th>
+              <td>{{planetDataService.planetInfo.population  | numData:'population'}}</td>
+              <th>Climate:</th>
+              <td>{{planetDataService.planetInfo.climate}}</td>
+            </tr>
+            <tr>
+              <th>Terrain:</th>
+              <td>{{planetDataService.planetInfo.terrain}}</td>
+              <th>Water coverage:</th>
+              <td>{{planetDataService.planetInfo.surface_water | numData:'surface_water'}}</td>
+            </tr>
+            <tr>
+              <th>Films:</th>
+              <td>
+                <p *ngFor="let film of planetDataService.filmNames">
+                  {{film | numData:'film'}}
+                </p>
+              </td>
+              <th>Residents:</th>
+              <td>
+                <p *ngFor="let resident of planetDataService.residentsNames">
+                {{resident | numData:'resident'}}
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</div>
+
+<ng-template #loadingBlock>
+  <div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 text-center" >
+      <div class="lds-dual-ring"></div>
+      <div class="loadingStatus">{{planetDataService.loading.msg}}</div>
+    </div>
+  </div>

@@ -1,31 +1,11 @@
-h3 {
-  font-family: 'Fjalla One', sans-serif;
-  text-decoration: underline;
-  color: #33E1ED;
-  text-align: center;
-  padding: 1rem;
-  margin: 0;
-}
-
-tr > th:first-child {
-  color: #FFFFFF;
-  font-family: 'Fjalla One', sans-serif;
-  width: 30%;
-  margin: 0;
-}
-tr > th:last-child {
-  padding: .75rem 1.5rem .75rem 1rem ;
-  color: #33E1ED;
-  width: 70%;
-  max-width: 100px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
 .list-item {
-  margin: 2rem 2rem 0rem 0rem;
-  color: #FFFFFF;
+  margin: 2rem 2rem 0 0;
+}
+
+.card-table td{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .more-info-button {
@@ -45,37 +25,8 @@ i {
   -webkit-transform: rotate(-45deg);
 }
 
-/* loader */
-.lds-dual-ring {
-  display: inline-block;
-  width: 64px;
-  height: 64px;
-}
-.lds-dual-ring:after {
-  content: " ";
-  display: block;
-  width: 46px;
-  height: 46px;
-  margin: 2rem 0 0 0;
-  border-radius: 50%;
-  border: 5px solid #33E1ED;
-  border-color: #33E1ED transparent #33E1ED transparent;
-  animation: lds-dual-ring 1.2s linear infinite;
-}
-@keyframes lds-dual-ring {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-/* end of loader */
-
-
 .search-panel {
   padding: 1rem;
-  color: #FFFFFF;
 }
 .search-input {
   margin-top: 0.7rem;
@@ -90,9 +41,6 @@ i {
 .search-input:focus {
   border: 3px solid rgba(51,225,237,1);
 }
-.search-input::placeholder {
-  color: #FFFFFF;
-}
 
 .cards-limiter {
   list-style: none;
@@ -102,58 +50,18 @@ i {
 }
 .cards-limiter li {
   display: inline;
-  margin: 0 0.2rem;
+  margin: 0 0.4rem;
   text-decoration: underline;
-}
-.input-label {
-  margin-top: 0.7rem;
-  margin-right: 1rem;
-  margin-bottom: 0;
-  font-family: 'Fjalla One', sans-serif;
-  font-size: 14px;
-}
-
-/* Search Panel Wookiee translation switch styles */
-input[type=checkbox]{
-  height: 0;
-  width: 0;
-  visibility: hidden;
-}
-
-.toogle {
   cursor: pointer;
-  text-indent: -9999px;
-  width: 4rem;
-  height: 2rem;
-  background: grey;
+}
+
+.pageButtons{
+  margin: 1rem;
   display: inline-block;
-  border-radius: 1rem;
-  position: absolute;
-  margin-top: 7px;
 }
-
-.toogle:after {
-  content: '';
-  position: absolute;
-  top: 0.1rem;
-  left: 0.1rem;
-  width: 1.6rem;
-  height: 1.7rem;
-  background: #1E1E2C;
-  border-radius: 0.8rem;
-  transition: 0.3s;
+.pageButtons a {
+  background-color: #2D2D44;
 }
-
-input:checked + .toogle {
-  background: #33E1ED;
+.pageButtons a:hover {
+  background-color: #33E1ED;
 }
-
-input:checked + .toogle:after {
-  left: calc(100% - 0.1rem);
-  transform: translateX(-100%);
-}
-
-.toogle:active:after {
-  width: 1rem;
-}
-/* End of Search Panel Wookiee translation switch styles*/

@@ -1,9 +1,103 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One&display=swap');
+
 body{
   background: #1E1E2C;
+  color: #FFFFFF;
+  text-transform: capitalize;
 }
+h3, h2 {
+  font-family: 'Fjalla One', sans-serif;
+  text-decoration: underline;
+  color: #33E1ED;
+  text-align: center;
+  padding: 1rem;
+  margin: 0;
+}
+tr > th {
+  color: #FFFFFF;
+  font-family: 'Fjalla One', sans-serif;
+  text-align: right;
+  font-weight: normal;
+  width: 30%;
+  margin: 0;
+}
+tr > td {
+  padding: .75rem 1.5rem .75rem 1rem ;
+  color: #33E1ED;
+  width: 70%;
+  max-width: 100px;
+  text-align: left;
+}
+a {
+  text-decoration: none;
+  color: #FFFFFF;
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 14px;
+}
+a:hover {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
 .main-container {
   background: #2D2D44;
   width: 100%;
   border-radius: 1rem;
 }
+.input-label {
+  margin-top: 0.7rem;
+  margin-right: 1rem;
+  margin-bottom: 0;
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 14px;
+}
+
+.back-button{
+  display: inline-block;
+  border-radius: 50%;
+  background: #1E1E2C;
+  padding: 8px 17px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.back-button:hover{
+  color: #1E1E2C;
+  background: #33E1ED;
+  text-decoration: none;
+}
+
+/* loader */
+.lds-dual-ring {
+  display: inline-block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 46px;
+  height: 46px;
+  margin: 2rem 0 0 0;
+  border-radius: 50%;
+  border: 5px solid;
+  border-color: #33E1ED transparent #33E1ED transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loadingStatus {
+  position: absolute;
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 100px;
+}
+/* end of loader */
 

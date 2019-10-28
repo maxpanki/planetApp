@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {PlanetDataService} from '../services/planet-data.service';
+import {ActivatedRoute, Params} from '@angular/router';
 
 @Component({
   selector: 'app-planet-card',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlanetCardComponent implements OnInit {
 
-  constructor() { }
+  constructor(public planetDataService: PlanetDataService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe((params: Params) => {
+      this.planetDataService.getPlanetInfo(params.id)
+    })
   }
 
 }

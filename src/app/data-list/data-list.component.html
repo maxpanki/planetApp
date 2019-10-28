@@ -1,63 +1,67 @@
 <div class="container main-container search-panel">
   <div class="row">
-
     <div class="col-lg-4 col-md-4 col-sm-12 text-center">
       <label class="input-label">
-        Find a Planet:
+        find a planet:
       </label>
       <input class="search-input" type="text" placeholder="Planet search..." [(ngModel)]="search" />
     </div>
-
-    <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-      <!--      <label class="input-label">-->
-      <!--        Wookiee translation:-->
-      <!--      </label>-->
-      <!--      <input type="checkbox" id="switch" />-->
-      <!--      <label class="toogle" for="switch">Toggle</label>-->
-    </div>
-
-    <div class="col-lg-4 col-md-4 col-sm-12 text-center">
-      <label class="input-label">Cards per page:</label>
+    <div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-sm-12 text-center">
+      <label class="input-label">cards per page:</label>
       <ul class="cards-limiter">
-        <li>5</li>
-        <li>10</li>
-        <li>25</li>
-        <li>100</li>
+        <li (click)="setPageSize($event)">5</li>
+        <li (click)="setPageSize($event)">10</li>
+        <li (click)="setPageSize($event)">25</li>
+        <li (click)="setPageSize($event)">100</li>
       </ul>
     </div>
-
   </div>
 </div>
-
-
-<div *ngIf="!loading; else loadingBlock" class="row">
-  <div *ngFor="let planetData of planetInfoList | filter:search" class="col-lg-4 col-md-6 col-sm-12" >
+<div *ngIf="planetDataService.loading.operationCount === 0; else loadingBlock" class="row">
+  <div *ngFor="let planetData of planetDataService.planetInfoList | filter:search"
+       class="col-lg-4 col-md-6 col-sm-12" >
     <div class="main-container list-item">
-      <h3>{{planetData.name}}</h3>
-      <table class="table">
+      <h3>{{planetData.name | titlecase}}</h3>
+      <table class="table card-table">
         <tbody>
           <tr>
-            <th>Climate</th>
-            <th>{{planetData.climate}}</th>
+            <th>climate:</th>
+            <td>{{planetData.climate}}</td>
           </tr>
           <tr>
-            <th>Population</th>
-            <th>{{planetData.population}}</th>
+            <th>population:</th>
+            <td>{{planetData.population | numData:'population'}}</td>
           </tr>
           <tr>
-            <th>Gravity</th>
-            <th>{{planetData.gravity}}</th>
+            <th>gravity:</th>
+            <td>{{planetData.gravity}}</td>
           </tr>
           <tr>
-            <th>Terrain</th>
-            <th>{{planetData.terrain}}</th>
+            <th>Terrain:</th>
+            <td>{{planetData.terrain}}</td>
           </tr>
         </tbody>
       </table>
       <div class="more-info-button">
-        More
-        <i class="arrow right"></i>
+        <a [routerLink]="['/planet', +planetData.url.slice('https://swapi.co/api/planets/'.length, planetData.url.length - 1)]">
+          more
+          <i class="arrow right"></i>
+        </a>
       </div>
+    </div>
+  </div>
+  <div class="col-lg-4 col-md-12 col-sm-12 text-center my-auto">
+    <div *ngIf="planetDataService.currentPage !== 0;" class="pageButtons">
+      <a (click)="changePage('prev')" class="back-button">
+      &#8249;
+      </a>
+      <p>previous page</p>
+    </div>
+    <div *ngIf="planetDataService.currentPage < planetDataService.maxPage;" class="pageButtons">
+      <a (click)="changePage('next')" class="back-button">
+      &#8250;
+      </a>
+      <p>next page</p>
     </div>
   </div>
 </div>
@@ -66,6 +70,7 @@
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 text-center" >
       <div class="lds-dual-ring"></div>
+      <div class="loadingStatus">{{planetDataService.loading.msg}}</div>
     </div>
   </div>
 </ng-template>
