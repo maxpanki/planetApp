@@ -95,15 +95,19 @@ export class PlanetDataService {
   constructor(private http: HttpClient, private router: Router) {}
 
   async getPlanetsData() {
-    this.changeLoaderStatus(`loading information about planets`)
+    this.changeLoaderStatus(`loading information about planets (0%)`)
     while (this.i !== Math.ceil(this.planetsInDataBase / 10) && this.serverIsAvailable) {
       try {
+        this.changeLoaderStatus(
+          `loading information about planets (${Math.round((100 * this.i) / Math.ceil(this.planetsInDataBase / 10))}%)`
+        )
         const planetData = await this.http.get<DataArr>(`${this.nextRequest}`).toPromise()
         this.planetsInDataBase = planetData.count
         this.nextRequest = planetData.next
         this.planetInfoList = this.planetInfoList.concat(planetData.results)
         this.serverIsAvailable = true
         this.i++
+        this.changeLoaderStatus('')
       } catch (e) {
         this.serverIsAvailable = false
         this.loadMockListData()
@@ -162,7 +166,7 @@ export class PlanetDataService {
   }
 
   async getResidentsName(urls: string[]) {
-    this.changeLoaderStatus('getting Information about residents')
+    this.changeLoaderStatus('getting information about residents')
     this.residentsNames = []
     if (!this.serverIsAvailable) {
       urls = urls.map((url) => {
